@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Accessing PHPStan\\\\ExtensionInstaller\\\\GeneratedConfig\\:\\:EXTENSIONS is not covered by backward compatibility promise\\. The class might change in a minor PHPStan version\\.$#"
+			count: 1
+			path: src/test.php
