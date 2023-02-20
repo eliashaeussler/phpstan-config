@@ -32,3 +32,13 @@ updates:
     labels:
       - dependencies
     open-pull-requests-limit: 10
+
+  - package-ecosystem: composer
+    directory: '/tests/manual'
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: '[TASK]'
+    labels:
+      - dependencies
+    open-pull-requests-limit: 10
