@@ -1,0 +1,7 @@
+includes:
+	- %rootDir%/../../eliashaeussler/phpstan-config/phpstan.neon.dist
+
+parameters:
+	level: max
+	paths:
+		- src
