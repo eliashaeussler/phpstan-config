@@ -37,3 +37,4 @@ jobs:
       # Run tests
       - name: Run tests
         run: composer test
+        working-directory: tests/${{ matrix.suite }}
