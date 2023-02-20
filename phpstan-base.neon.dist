@@ -1,6 +1,3 @@
-includes:
-	- %rootDir%/conf/bleedingEdge.neon
-
 parameters:
 	# Open files in PhpStorm
 	editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
