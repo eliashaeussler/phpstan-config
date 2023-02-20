@@ -1,0 +1,4 @@
+includes:
+	- phpstan-base.neon.dist
+	- %rootDir%/../../phpstan/phpstan-deprecation-rules/rules.neon
+	- %rootDir%/../../phpstan/phpstan-strict-rules/rules.neon
