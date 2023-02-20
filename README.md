@@ -3,6 +3,7 @@
 # PHPStan config
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/c334b9eef94a1ff7bd5d/maintainability)](https://codeclimate.com/github/eliashaeussler/phpstan-config/maintainability)
+[![Tests](https://github.com/eliashaeussler/phpstan-config/actions/workflows/tests.yaml/badge.svg)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/tests.yaml)
 [![CGL](https://github.com/eliashaeussler/phpstan-config/actions/workflows/cgl.yaml/badge.svg)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/cgl.yaml)
 [![Release](https://github.com/eliashaeussler/phpstan-config/actions/workflows/release.yaml/badge.svg)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/release.yaml)
 [![Latest Stable Version](http://poser.pugx.org/eliashaeussler/phpstan-config/v)](https://packagist.org/packages/eliashaeussler/phpstan-config)

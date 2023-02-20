@@ -1,0 +1,41 @@
+{
+	"name": "eliashaeussler/phpstan-config-test-manual",
+	"require-dev": {
+		"eliashaeussler/php-cs-fixer-config": "^1.1",
+		"eliashaeussler/phpstan-config": "*@dev",
+		"ergebnis/composer-normalize": "^2.29"
+	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../../",
+			"options": {
+				"symlink": false
+			}
+		}
+	],
+	"config": {
+		"allow-plugins": {
+			"ergebnis/composer-normalize": true
+		},
+		"sort-packages": true
+	},
+	"scripts": {
+		"lint": [
+			"@lint:composer:fix",
+			"@lint:php:fix"
+		],
+		"lint:composer": "@lint:composer:fix --dry-run",
+		"lint:composer:fix": "@composer normalize",
+		"lint:php": "@lint:php:fix --dry-run",
+		"lint:php:fix": "php-cs-fixer fix",
+		"sca": [
+			"@sca:php"
+		],
+		"sca:php": "phpstan analyse -c phpstan.neon",
+		"test": [
+			"src/test.sh phpstan/phpstan-deprecation-rules",
+			"src/test.sh phpstan/phpstan-strict-rules"
+		]
+	}
+}
