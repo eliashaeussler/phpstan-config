@@ -1,14 +1,15 @@
 {
-	"name": "eliashaeussler/phpstan-config-test-manual",
+	"name": "eliashaeussler/phpstan-config-test-extension-installer",
 	"require-dev": {
 		"eliashaeussler/php-cs-fixer-config": "^1.1",
 		"eliashaeussler/phpstan-config": "*@dev",
-		"ergebnis/composer-normalize": "^2.29"
+		"ergebnis/composer-normalize": "^2.29",
+		"phpstan/extension-installer": "^1.2"
 	},
 	"repositories": [
 		{
 			"type": "path",
-			"url": "../../",
+			"url": "../../../",
 			"options": {
 				"symlink": false
 			}
@@ -16,7 +17,8 @@
 	],
 	"config": {
 		"allow-plugins": {
-			"ergebnis/composer-normalize": true
+			"ergebnis/composer-normalize": true,
+			"phpstan/extension-installer": true
 		},
 		"sort-packages": true
 	},
@@ -34,8 +36,9 @@
 		],
 		"sca:php": "phpstan analyse -c phpstan.neon",
 		"test": [
-			"src/test.sh phpstan/phpstan-deprecation-rules",
-			"src/test.sh phpstan/phpstan-strict-rules"
+            "@php src/test.php eliashaeussler/phpstan-config",
+			"@php src/test.php phpstan/phpstan-deprecation-rules",
+			"@php src/test.php phpstan/phpstan-strict-rules"
 		]
 	}
 }
