@@ -23,14 +23,19 @@ declare(strict_types=1);
 
 use EliasHaeussler\RectorConfig\Config;
 use Rector\Config\RectorConfig;
+use Rector\Core\ValueObject\PhpVersion;
+use Rector\Privatization\Rector\Class_\ChangeReadOnlyVariableWithDefaultValueToConstantRector;
 
 return static function (RectorConfig $rectorConfig): void {
-    Config\Config::create($rectorConfig)
+    Config\Config::create($rectorConfig, PhpVersion::PHP_81)
         ->in(
             __DIR__.'/src',
             __DIR__.'/tests/src',
         )
         ->withPHPUnit()
+        ->skip(ChangeReadOnlyVariableWithDefaultValueToConstantRector::class, [
+            __DIR__.'/tests/src',
+        ])
         ->apply()
     ;
 };

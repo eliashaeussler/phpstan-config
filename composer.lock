@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "279c1355ae454c54061f714ceff30899",
+    "content-hash": "a62645c5c759a30eabf40a5824ffbaa7",
     "packages": [
         {
             "name": "phpstan/phpstan",
@@ -650,16 +650,16 @@
         },
         {
             "name": "eliashaeussler/rector-config",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eliashaeussler/rector-config.git",
-                "reference": "5fc26dc99507d52bd42720c1de00d8a4f7deccb0"
+                "reference": "c46f1d77e3d39ef973e31841636177044eafe2a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eliashaeussler/rector-config/zipball/5fc26dc99507d52bd42720c1de00d8a4f7deccb0",
-                "reference": "5fc26dc99507d52bd42720c1de00d8a4f7deccb0",
+                "url": "https://api.github.com/repos/eliashaeussler/rector-config/zipball/c46f1d77e3d39ef973e31841636177044eafe2a7",
+                "reference": "c46f1d77e3d39ef973e31841636177044eafe2a7",
                 "shasum": ""
             },
             "require": {
@@ -704,9 +704,9 @@
             "description": "My personal configuration for Rector",
             "support": {
                 "issues": "https://github.com/eliashaeussler/rector-config/issues",
-                "source": "https://github.com/eliashaeussler/rector-config/tree/1.5.0"
+                "source": "https://github.com/eliashaeussler/rector-config/tree/1.6.0"
             },
-            "time": "2023-05-16T00:39:05+00:00"
+            "time": "2023-05-27T14:59:03+00:00"
         },
         {
             "name": "ergebnis/composer-normalize",
