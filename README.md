@@ -2,11 +2,11 @@
 
 # PHPStan config
 
-[![Tests](https://github.com/eliashaeussler/phpstan-config/actions/workflows/tests.yaml/badge.svg)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/tests.yaml)
-[![CGL](https://github.com/eliashaeussler/phpstan-config/actions/workflows/cgl.yaml/badge.svg)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/cgl.yaml)
-[![Release](https://github.com/eliashaeussler/phpstan-config/actions/workflows/release.yaml/badge.svg)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/release.yaml)
-[![Latest Stable Version](http://poser.pugx.org/eliashaeussler/phpstan-config/v)](https://packagist.org/packages/eliashaeussler/phpstan-config)
-[![License](http://poser.pugx.org/eliashaeussler/phpstan-config/license)](LICENSE)
+[![Coverage](https://img.shields.io/codecov/c/github/eliashaeussler/phpstan-config?logo=codecov&token=jej8oVuu4h)](https://codecov.io/gh/eliashaeussler/phpstan-config)
+[![Maintainability](https://img.shields.io/codeclimate/maintainability/eliashaeussler/phpstan-config?logo=codeclimate)](https://codeclimate.com/github/eliashaeussler/phpstan-config/maintainability)
+[![CGL](https://img.shields.io/github/actions/workflow/status/eliashaeussler/phpstan-config/cgl.yaml?label=cgl&logo=github)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/cgl.yaml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/eliashaeussler/phpstan-config/tests.yaml?label=tests&logo=github)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/tests.yaml)
+[![Supported PHP Versions](https://img.shields.io/packagist/dependency-v/eliashaeussler/phpstan-config/php?logo=php)](https://packagist.org/packages/eliashaeussler/phpstan-config)
 
 </div>
 
@@ -15,6 +15,9 @@ personal projects. It is not meant to be used anywhere else. I won't provide
 support and don't accept pull requests for this repo.
 
 ## 🔥 Installation
+
+[![Packagist](https://img.shields.io/packagist/v/eliashaeussler/phpstan-config?label=version&logo=packagist)](https://packagist.org/packages/eliashaeussler/phpstan-config)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/eliashaeussler/phpstan-config?color=brightgreen)](https://packagist.org/packages/eliashaeussler/phpstan-config)
 
 ```bash
 composer require eliashaeussler/phpstan-config
