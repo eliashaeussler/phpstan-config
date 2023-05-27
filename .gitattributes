@@ -8,6 +8,7 @@
 /codecov.yml              export-ignore
 /CODEOWNERS               export-ignore
 /composer.lock            export-ignore
+/composer-unused.php      export-ignore
 /phpstan.php              export-ignore
 /phpunit.xml              export-ignore
 /rector.php               export-ignore
