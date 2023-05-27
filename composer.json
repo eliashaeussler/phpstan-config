@@ -12,13 +12,27 @@
 		}
 	],
 	"require": {
+		"php": "~8.1.0 || ~8.2.0",
 		"phpstan/phpstan": "^1.9",
 		"phpstan/phpstan-deprecation-rules": "^1.1",
 		"phpstan/phpstan-strict-rules": "^1.4"
 	},
 	"require-dev": {
 		"armin/editorconfig-cli": "^1.5",
-		"ergebnis/composer-normalize": "^2.29"
+		"eliashaeussler/php-cs-fixer-config": "^1.2",
+		"eliashaeussler/rector-config": "^1.6",
+		"ergebnis/composer-normalize": "^2.29",
+		"phpunit/phpunit": "^10.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"EliasHaeussler\\PHPStanConfig\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"EliasHaeussler\\PHPStanConfig\\Tests\\": "tests/src/"
+		}
 	},
 	"config": {
 		"allow-plugins": {
@@ -36,23 +50,40 @@
 	"scripts": {
 		"lint": [
 			"@lint:composer:fix",
-			"@lint:editorconfig:fix"
+			"@lint:editorconfig:fix",
+			"@lint:php:fix"
 		],
 		"lint:composer": "@lint:composer:fix --dry-run",
 		"lint:composer:fix": "@composer normalize",
 		"lint:editorconfig": "ec",
 		"lint:editorconfig:fix": "@lint:editorconfig --fix",
+		"lint:php": "@lint:php:fix --dry-run",
+		"lint:php:fix": "php-cs-fixer fix",
+		"migration": [
+			"@migration:rector"
+		],
+		"migration:rector": "rector process -c rector.php",
+		"sca": [
+			"@sca:php"
+		],
+		"sca:php": "phpstan analyse -c phpstan.php",
 		"test": [
-			"@test:extension-installer",
-			"@test:manual"
+			"@test:e2e",
+			"@test:unit"
 		],
-		"test:extension-installer": [
-			"@composer -d tests/extension-installer install",
-			"@composer -d tests/extension-installer test"
+		"test:e2e": [
+			"@test:e2e:extension-installer",
+			"@test:e2e:manual"
 		],
-		"test:manual": [
-			"@composer -d tests/manual install",
-			"@composer -d tests/manual test"
-		]
+		"test:e2e:extension-installer": [
+			"@composer -d tests/e2e/extension-installer install",
+			"@composer -d tests/e2e/extension-installer test"
+		],
+		"test:e2e:manual": [
+			"@composer -d tests/e2e/manual install",
+			"@composer -d tests/e2e/manual test"
+		],
+		"test:unit": "@test:unit:coverage --no-coverage",
+		"test:unit:coverage": "phpunit -c phpunit.xml"
 	}
 }
