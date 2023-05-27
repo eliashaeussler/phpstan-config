@@ -27,6 +27,10 @@ use EliasHaeussler\PHPStanConfig\Enums;
 use EliasHaeussler\PHPStanConfig\Resource;
 use EliasHaeussler\PHPStanConfig\Set;
 
+use function preg_quote;
+use function sprintf;
+use function str_starts_with;
+
 /**
  * Config.
  *

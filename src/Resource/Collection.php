@@ -23,6 +23,10 @@ declare(strict_types=1);
 
 namespace EliasHaeussler\PHPStanConfig\Resource;
 
+use function array_merge_recursive;
+use function is_array;
+use function str_getcsv;
+
 /**
  * Collection.
  *
