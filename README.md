@@ -53,7 +53,7 @@ to your `phpstan.php` file:
 
 use EliasHaeussler\PHPStanConfig;
 
-$config = PHPStanConfig\Config\Config::create()->in(
+$config = PHPStanConfig\Config\Config::create(__DIR__)->in(
     'src',
     'tests',
 );
