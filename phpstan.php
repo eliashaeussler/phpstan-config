@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 use EliasHaeussler\PHPStanConfig\Config;
 
-return Config\Config::create()
+return Config\Config::create(__DIR__)
     ->in('src', 'tests/src')
     ->withBleedingEdge()
     ->maxLevel()

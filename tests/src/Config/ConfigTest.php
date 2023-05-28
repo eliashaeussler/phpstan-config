@@ -39,7 +39,7 @@ final class ConfigTest extends Framework\TestCase
 
     protected function setUp(): void
     {
-        $this->subject = Src\Config\Config::create();
+        $this->subject = Src\Config\Config::create('/my-project/');
     }
 
     #[Framework\Attributes\Test]
@@ -66,14 +66,15 @@ final class ConfigTest extends Framework\TestCase
     #[Framework\Attributes\Test]
     public function inConfiguresPaths(): void
     {
-        $this->subject->in('foo', 'baz');
+        $this->subject->in('foo', 'baz', '/foo/baz');
 
         $expected = [
             'includes' => [],
             'parameters' => [
                 'paths' => [
-                    'foo',
-                    'baz',
+                    '/my-project/foo',
+                    '/my-project/baz',
+                    '/foo/baz',
                 ],
             ],
         ];
@@ -90,8 +91,8 @@ final class ConfigTest extends Framework\TestCase
             'includes' => [],
             'parameters' => [
                 'excludePaths' => [
-                    'foo',
-                    'baz',
+                    '/my-project/foo',
+                    '/my-project/baz',
                 ],
             ],
         ];

@@ -27,7 +27,9 @@ use EliasHaeussler\PHPStanConfig\Enums;
 use EliasHaeussler\PHPStanConfig\Resource;
 use EliasHaeussler\PHPStanConfig\Set;
 
+use function array_map;
 use function preg_quote;
+use function rtrim;
 use function sprintf;
 use function str_starts_with;
 
@@ -40,19 +42,25 @@ use function str_starts_with;
 final class Config
 {
     /**
+     * @param non-empty-string       $projectDirectory
      * @param list<non-empty-string> $includes
      * @param list<Set\Set>          $sets
      */
     private function __construct(
+        private readonly string $projectDirectory,
         private readonly Resource\Collection $parameters,
         private array $includes = [],
         private array $sets = [],
     ) {
     }
 
-    public static function create(): self
+    /**
+     * @param non-empty-string $projectDirectory
+     */
+    public static function create(string $projectDirectory): self
     {
         return new self(
+            rtrim($projectDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR,
             Resource\Collection::create(),
         );
     }
@@ -73,6 +81,8 @@ final class Config
      */
     public function in(string ...$paths): self
     {
+        $paths = array_map($this->expandPath(...), $paths);
+
         $this->parameters->add('paths', ...$paths);
 
         return $this;
@@ -85,6 +95,8 @@ final class Config
      */
     public function not(string ...$paths): self
     {
+        $paths = array_map($this->expandPath(...), $paths);
+
         $this->parameters->add('excludePaths', ...$paths);
 
         return $this;
@@ -257,5 +269,21 @@ final class Config
             'includes' => $this->includes,
             'parameters' => $parameters->toArray(),
         ];
+    }
+
+    /**
+     * @param non-empty-string $path
+     *
+     * @return non-empty-string
+     */
+    private function expandPath(string $path): string
+    {
+        foreach ([DIRECTORY_SEPARATOR, 'phar://'] as $pathPrefix) {
+            if (str_starts_with($path, $pathPrefix)) {
+                return $path;
+            }
+        }
+
+        return $this->projectDirectory.$path;
     }
 }
