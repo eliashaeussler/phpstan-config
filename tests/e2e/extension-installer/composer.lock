@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0086eb700c92b39de7504beeb4fc2da8",
+    "content-hash": "1e9db98fde9d5a0977273d25f56dea0b",
     "packages": [],
     "packages-dev": [
         {
@@ -432,13 +432,14 @@
         },
         {
             "name": "eliashaeussler/phpstan-config",
-            "version": "dev-feature/php-api",
+            "version": "99.99.99",
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "7b9173e8e59fb022e2e3d3bf1489d153e6b53871"
+                "reference": "a6bdaccb9cb3359318173a237ac602da3a8773b2"
             },
             "require": {
+                "php": "~8.1.0 || ~8.2.0",
                 "phpstan/phpstan": "^1.9",
                 "phpstan/phpstan-deprecation-rules": "^1.1",
                 "phpstan/phpstan-strict-rules": "^1.4"
@@ -446,7 +447,9 @@
             "require-dev": {
                 "armin/editorconfig-cli": "^1.5",
                 "eliashaeussler/php-cs-fixer-config": "^1.2",
-                "ergebnis/composer-normalize": "^2.29"
+                "eliashaeussler/rector-config": "^1.6",
+                "ergebnis/composer-normalize": "^2.29",
+                "phpunit/phpunit": "^10.1"
             },
             "type": "library",
             "extra": {
@@ -459,6 +462,11 @@
             "autoload": {
                 "psr-4": {
                     "EliasHaeussler\\PHPStanConfig\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "EliasHaeussler\\PHPStanConfig\\Tests\\": "tests/src/"
                 }
             },
             "scripts": {
@@ -485,6 +493,12 @@
                 "lint:php:fix": [
                     "php-cs-fixer fix"
                 ],
+                "migration": [
+                    "@migration:rector"
+                ],
+                "migration:rector": [
+                    "rector process -c rector.php"
+                ],
                 "sca": [
                     "@sca:php"
                 ],
@@ -492,16 +506,26 @@
                     "phpstan analyse -c phpstan.php"
                 ],
                 "test": [
-                    "@test:extension-installer",
-                    "@test:manual"
+                    "@test:e2e",
+                    "@test:unit"
                 ],
-                "test:extension-installer": [
-                    "@composer -d tests/extension-installer install",
-                    "@composer -d tests/extension-installer test"
+                "test:e2e": [
+                    "@test:e2e:extension-installer",
+                    "@test:e2e:manual"
                 ],
-                "test:manual": [
-                    "@composer -d tests/manual install",
-                    "@composer -d tests/manual test"
+                "test:e2e:extension-installer": [
+                    "@composer -d tests/e2e/extension-installer install",
+                    "@composer -d tests/e2e/extension-installer test"
+                ],
+                "test:e2e:manual": [
+                    "@composer -d tests/e2e/manual install",
+                    "@composer -d tests/e2e/manual test"
+                ],
+                "test:unit": [
+                    "@test:unit:coverage --no-coverage"
+                ],
+                "test:unit:coverage": [
+                    "phpunit -c phpunit.xml"
                 ]
             },
             "license": [
@@ -2924,9 +2948,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "eliashaeussler/phpstan-config": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

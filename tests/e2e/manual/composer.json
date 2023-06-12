@@ -2,7 +2,7 @@
 	"name": "eliashaeussler/phpstan-config-test-manual",
 	"require-dev": {
 		"eliashaeussler/php-cs-fixer-config": "^1.1",
-		"eliashaeussler/phpstan-config": "*@dev",
+		"eliashaeussler/phpstan-config": "99.99.99",
 		"ergebnis/composer-normalize": "^2.29"
 	},
 	"repositories": [
@@ -10,7 +10,10 @@
 			"type": "path",
 			"url": "../../../",
 			"options": {
-				"symlink": false
+				"symlink": false,
+				"versions": {
+					"eliashaeussler/phpstan-config": "99.99.99"
+				}
 			}
 		}
 	],
