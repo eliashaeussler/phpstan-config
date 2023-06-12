@@ -146,6 +146,29 @@ final class ConfigTest extends Framework\TestCase
     }
 
     #[Framework\Attributes\Test]
+    public function withBleedingEdgeTogglesGivenFeatures(): void
+    {
+        $this->subject->withBleedingEdge([
+            'consistentConstructor' => false,
+            'explicitMixedForGlobalVariables' => false,
+        ]);
+
+        $expected = [
+            'includes' => [
+                'phar://phpstan.phar/conf/bleedingEdge.neon',
+            ],
+            'parameters' => [
+                'featureToggles' => [
+                    'consistentConstructor' => false,
+                    'explicitMixedForGlobalVariables' => false,
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->subject->toArray());
+    }
+
+    #[Framework\Attributes\Test]
     public function withBaselineConfiguresIncludeForBaselineFile(): void
     {
         $this->subject->withBaseline();

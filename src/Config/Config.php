@@ -125,10 +125,16 @@ final class Config
     }
 
     /**
+     * @param array<non-empty-string, bool> $featureToggles
+     *
      * @see https://phpstan.org/blog/what-is-bleeding-edge
      */
-    public function withBleedingEdge(): self
+    public function withBleedingEdge(array $featureToggles = []): self
     {
+        foreach ($featureToggles as $name => $value) {
+            $this->parameters->set('featureToggles/'.$name, $value);
+        }
+
         return $this->with('phar://phpstan.phar/conf/bleedingEdge.neon');
     }
 
