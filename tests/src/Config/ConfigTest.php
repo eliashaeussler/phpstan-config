@@ -91,8 +91,10 @@ final class ConfigTest extends Framework\TestCase
             'includes' => [],
             'parameters' => [
                 'excludePaths' => [
-                    '/my-project/foo',
-                    '/my-project/baz',
+                    'analyseAndScan' => [
+                        '/my-project/foo',
+                        '/my-project/baz',
+                    ],
                 ],
             ],
         ];

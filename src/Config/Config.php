@@ -97,7 +97,7 @@ final class Config
     {
         $paths = array_map($this->expandPath(...), $paths);
 
-        $this->parameters->add('excludePaths', ...$paths);
+        $this->parameters->add('excludePaths/analyseAndScan', ...$paths);
 
         return $this;
     }
