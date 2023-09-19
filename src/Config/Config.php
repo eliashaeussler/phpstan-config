@@ -51,8 +51,7 @@ final class Config
         private readonly Resource\Collection $parameters,
         private array $includes = [],
         private array $sets = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @param non-empty-string $projectDirectory

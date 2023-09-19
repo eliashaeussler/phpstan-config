@@ -37,8 +37,7 @@ final class SymfonySet implements ParameterizableSet
 {
     private function __construct(
         private readonly Resource\Collection $parameters,
-    ) {
-    }
+    ) {}
 
     public static function create(): self
     {

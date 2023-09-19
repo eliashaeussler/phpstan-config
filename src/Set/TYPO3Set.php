@@ -37,8 +37,7 @@ final class TYPO3Set implements ParameterizableSet
 {
     private function __construct(
         private readonly Resource\Collection $parameters,
-    ) {
-    }
+    ) {}
 
     public static function create(): self
     {

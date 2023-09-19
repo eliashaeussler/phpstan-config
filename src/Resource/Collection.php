@@ -42,8 +42,7 @@ final class Collection
     private function __construct(
         private readonly string $pathDelimiter,
         private array $collection,
-    ) {
-    }
+    ) {}
 
     /**
      * @param non-empty-string $pathDelimiter
