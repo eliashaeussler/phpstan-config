@@ -41,8 +41,7 @@ final class DummySet implements Set\ParameterizableSet
      */
     public function __construct(
         public array $parameters = ['foo' => 'baz'],
-    ) {
-    }
+    ) {}
 
     public function getParameters(): Resource\Collection
     {
