@@ -104,6 +104,13 @@ $config->reportUnmatchedIgnoredErrors(false);
 // Define error formatter
 $config->formatAs(PHPStanConfig\Enums\ErrorFormat::Json);
 
+// Include Doctrine set
+$doctrineSet = PHPStanConfig\Set\DoctrineSet::create()
+    ->withObjectManagerLoader('tests/object-manager.php')
+    ->withOrmRepositoryClass(\MyApp\Doctrine\BetterEntityRepository::class)
+    ->withOdmRepositoryClass(\MyApp\Doctrine\BetterDocumentRepository::class)
+$config->withSets($doctrineSet);
+
 // Include Symfony set
 $symfonySet = PHPStanConfig\Set\SymfonySet::create()
     ->withConsoleApplicationLoader('tests/build/console-application.php')
