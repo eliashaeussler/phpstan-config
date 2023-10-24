@@ -37,7 +37,7 @@
 		],
 		"sca:php": "phpstan analyse -c phpstan.neon",
 		"test": [
-            "src/test.sh phpstan/phpstan-deprecation-rules",
+			"src/test.sh phpstan/phpstan-deprecation-rules",
 			"src/test.sh phpstan/phpstan-strict-rules"
 		]
 	}
