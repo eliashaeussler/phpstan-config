@@ -39,7 +39,7 @@
 		],
 		"sca:php": "phpstan analyse -c phpstan.neon",
 		"test": [
-            "@php src/test.php eliashaeussler/phpstan-config",
+			"@php src/test.php eliashaeussler/phpstan-config",
 			"@php src/test.php phpstan/phpstan-deprecation-rules",
 			"@php src/test.php phpstan/phpstan-strict-rules"
 		]
