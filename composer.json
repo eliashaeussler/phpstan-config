@@ -20,7 +20,7 @@
 	"require-dev": {
 		"armin/editorconfig-cli": "^1.5",
 		"eliashaeussler/php-cs-fixer-config": "^1.2",
-		"eliashaeussler/rector-config": "^1.6",
+		"eliashaeussler/rector-config": "^2.0",
 		"ergebnis/composer-normalize": "^2.29",
 		"phpunit/phpunit": "^10.1"
 	},
