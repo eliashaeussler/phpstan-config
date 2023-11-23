@@ -255,6 +255,16 @@ final class Config
     }
 
     /**
+     * @see https://phpstan.org/config-reference#treatphpdoctypesascertain
+     */
+    public function treatPhpDocTypesAsCertain(bool $enable = true): self
+    {
+        $this->parameters->set('treatPhpDocTypesAsCertain', $enable);
+
+        return $this;
+    }
+
+    /**
      * @return array{
      *     includes: list<non-empty-string>,
      *     parameters: array<non-empty-string, mixed>,

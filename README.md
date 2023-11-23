@@ -104,6 +104,9 @@ $config->reportUnmatchedIgnoredErrors(false);
 // Define error formatter
 $config->formatAs(PHPStanConfig\Enums\ErrorFormat::Json);
 
+// Treat phpdoc types as certain
+$config->treatPhpDocTypesAsCertain();
+
 // Include Doctrine set
 $doctrineSet = PHPStanConfig\Set\DoctrineSet::create()
     ->withObjectManagerLoader('tests/object-manager.php')
