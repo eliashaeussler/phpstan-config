@@ -128,6 +128,9 @@ $typo3Set = PHPStanConfig\Set\TYPO3Set::create()
     ->withCustomSiteAttribute('myArrayAttribute', 'array');
 $config->withSets($typo3Set);
 
+// Set custom parameters
+$config->parameters->set('tipsOfTheDay', false);
+
 return $config->toArray();
 ```
 

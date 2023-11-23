@@ -48,7 +48,7 @@ final class Config
      */
     private function __construct(
         private readonly string $projectDirectory,
-        private readonly Resource\Collection $parameters,
+        public readonly Resource\Collection $parameters,
         private array $includes = [],
         private array $sets = [],
     ) {}
