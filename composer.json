@@ -18,7 +18,7 @@
 		"phpstan/phpstan-strict-rules": "^1.4"
 	},
 	"require-dev": {
-		"armin/editorconfig-cli": "^2.0",
+		"armin/editorconfig-cli": "^1.8 || ^2.0",
 		"eliashaeussler/php-cs-fixer-config": "^2.0",
 		"eliashaeussler/rector-config": "^2.0",
 		"ergebnis/composer-normalize": "^2.29",
