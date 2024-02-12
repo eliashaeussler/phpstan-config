@@ -206,9 +206,9 @@ final class Config
      */
     public function ignoreError(
         string $message,
-        string $path = null,
-        int $count = null,
-        bool $reportUnmatched = null,
+        ?string $path = null,
+        ?int $count = null,
+        ?bool $reportUnmatched = null,
     ): self {
         // Convert plain message to regex
         if (!str_starts_with($message, '#')) {
