@@ -110,8 +110,8 @@ final class Collection
     }
 
     /**
-     * @param non-empty-string                                 $path
-     * @param callable(array<string, mixed> &$reference): void $function
+     * @param non-empty-string                         $path
+     * @param callable(array<mixed> &$reference): void $function
      */
     private function modifyAtPath(string $path, callable $function): void
     {
