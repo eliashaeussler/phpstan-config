@@ -385,6 +385,25 @@ final class ConfigTest extends Framework\TestCase
     }
 
     #[Framework\Attributes\Test]
+    public function checkMissingCheckedExceptionInThrowsConfiguresExceptionsCheckForMissingCheckedExceptionInThrows(): void
+    {
+        $this->subject->checkMissingCheckedExceptionInThrows();
+
+        $expected = [
+            'includes' => [],
+            'parameters' => [
+                'exceptions' => [
+                    'check' => [
+                        'missingCheckedExceptionInThrows' => true,
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->subject->toArray());
+    }
+
+    #[Framework\Attributes\Test]
     public function reportUncheckedExceptionDeadCatchConfiguresReportForUncheckedExceptionDeadCatch(): void
     {
         $this->subject->reportUncheckedExceptionDeadCatch();

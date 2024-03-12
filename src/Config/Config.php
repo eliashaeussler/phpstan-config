@@ -277,6 +277,16 @@ final class Config
     /**
      * @see https://phpstan.org/config-reference#exceptions
      */
+    public function checkMissingCheckedExceptionInThrows(bool $enable = true): self
+    {
+        $this->parameters->set('exceptions/check/missingCheckedExceptionInThrows', $enable);
+
+        return $this;
+    }
+
+    /**
+     * @see https://phpstan.org/config-reference#exceptions
+     */
     public function reportUncheckedExceptionDeadCatch(bool $enable = true): self
     {
         $this->parameters->set('exceptions/reportUncheckedExceptionDeadCatch', $enable);
