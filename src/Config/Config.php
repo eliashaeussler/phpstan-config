@@ -265,6 +265,16 @@ final class Config
     }
 
     /**
+     * @see https://phpstan.org/config-reference#exceptions
+     */
+    public function checkTooWideThrowTypes(bool $enable = true): self
+    {
+        $this->parameters->set('exceptions/check/tooWideThrowType', $enable);
+
+        return $this;
+    }
+
+    /**
      * @return array{
      *     includes: list<non-empty-string>,
      *     parameters: array<non-empty-string, mixed>,
