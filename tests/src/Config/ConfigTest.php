@@ -384,6 +384,23 @@ final class ConfigTest extends Framework\TestCase
         self::assertSame($expected, $this->subject->toArray());
     }
 
+    #[Framework\Attributes\Test]
+    public function reportUncheckedExceptionDeadCatchConfiguresReportForUncheckedExceptionDeadCatch(): void
+    {
+        $this->subject->reportUncheckedExceptionDeadCatch();
+
+        $expected = [
+            'includes' => [],
+            'parameters' => [
+                'exceptions' => [
+                    'reportUncheckedExceptionDeadCatch' => true,
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->subject->toArray());
+    }
+
     /**
      * @return Generator<string, array{
      *     non-empty-string|null,
