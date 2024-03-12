@@ -283,7 +283,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "6dced5ed3e90126bdd385e751b399c334da19269"
+                "reference": "d63cf919fdb34b2d06263d781c811d2116136462"
             },
             "require": {
                 "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
@@ -292,11 +292,11 @@
                 "phpstan/phpstan-strict-rules": "^1.4"
             },
             "require-dev": {
-                "armin/editorconfig-cli": "^1.5",
-                "eliashaeussler/php-cs-fixer-config": "^1.2",
-                "eliashaeussler/rector-config": "^1.6",
+                "armin/editorconfig-cli": "^1.8 || ^2.0",
+                "eliashaeussler/php-cs-fixer-config": "^2.0",
+                "eliashaeussler/rector-config": "^3.0",
                 "ergebnis/composer-normalize": "^2.29",
-                "phpunit/phpunit": "^10.1"
+                "phpunit/phpunit": "^10.1 || ^11.0"
             },
             "type": "library",
             "extra": {
@@ -313,7 +313,7 @@
             },
             "autoload-dev": {
                 "psr-4": {
-                    "EliasHaeussler\\PHPStanConfig\\Tests\\": "tests/src/"
+                    "EliasHaeussler\\PHPStanConfig\\Tests\\": "tests/unit/"
                 }
             },
             "scripts": {
