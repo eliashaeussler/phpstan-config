@@ -29,7 +29,7 @@ return static function (RectorConfig $rectorConfig): void {
     Config\Config::create($rectorConfig, PhpVersion::PHP_81)
         ->in(
             __DIR__.'/src',
-            __DIR__.'/tests/src',
+            __DIR__.'/tests/unit',
         )
         ->withPHPUnit()
         ->apply()

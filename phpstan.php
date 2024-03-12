@@ -24,7 +24,7 @@ declare(strict_types=1);
 use EliasHaeussler\PHPStanConfig\Config;
 
 return Config\Config::create(__DIR__)
-    ->in('src', 'tests/src')
+    ->in('src', 'tests/unit')
     ->withBleedingEdge()
     ->maxLevel()
     ->useCacheDir('.build/cache/phpstan')
