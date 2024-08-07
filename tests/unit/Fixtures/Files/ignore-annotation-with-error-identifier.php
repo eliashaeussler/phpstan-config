@@ -21,14 +21,13 @@ declare(strict_types=1);
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-use EliasHaeussler\PHPStanConfig\Config;
+/**
+ * @param non-empty-string $name
+ */
+function hello(string $name): void
+{
+    echo sprintf('Hello, %s!', $name);
+}
 
-return Config\Config::create(__DIR__)
-    ->in('src', 'tests/unit')
-    ->not('tests/unit/Fixtures/Files')
-    ->with('extension.neon')
-    ->withBleedingEdge()
-    ->maxLevel()
-    ->useCacheDir('.build/cache/phpstan')
-    ->toArray()
-;
+// @ignore-next-line argument.type
+hello('');

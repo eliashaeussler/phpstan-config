@@ -22,6 +22,8 @@
 		"eliashaeussler/php-cs-fixer-config": "^2.0",
 		"eliashaeussler/rector-config": "^3.0",
 		"ergebnis/composer-normalize": "^2.29",
+		"nikic/php-parser": "*",
+		"phpstan/phpdoc-parser": "*",
 		"phpunit/phpunit": "^10.1 || ^11.0"
 	},
 	"autoload": {
@@ -43,7 +45,7 @@
 	"extra": {
 		"phpstan": {
 			"includes": [
-				"phpstan-base.neon.dist"
+				"extension.neon"
 			]
 		}
 	},

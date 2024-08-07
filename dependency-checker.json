@@ -1,0 +1,9 @@
+{
+	"symbol-whitelist": [
+		"PHPStan\\Analyser\\Scope",
+		"PHPStan\\Rules\\Rule",
+		"PHPStan\\Rules\\RuleError",
+		"PHPStan\\Rules\\RuleErrorBuilder",
+		"PHPStan\\Type\\FileTypeMapper"
+	]
+}

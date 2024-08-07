@@ -28,7 +28,7 @@ composer require eliashaeussler/phpstan-config
 ### With extension installer
 
 If you have the [`phpstan/extension-installer`](https://github.com/phpstan/extension-installer)
-package installed, there's nothing more to do. The [base configuration](phpstan-base.neon.dist)
+package installed, there's nothing more to do. The [base configuration](extension.neon)
 is automatically included.
 
 ### Manual include
@@ -130,6 +130,44 @@ $config->withSets($typo3Set);
 
 // Set custom parameters
 $config->parameters->set('tipsOfTheDay', false);
+
+return $config->toArray();
+```
+
+## 🔎 Rules
+
+The packages also provides some additional PHPStan rules. All rules are enabled by default.
+
+### [`IgnoreAnnotationWithoutErrorIdentifierRule`](src/Rule/IgnoreAnnotationWithoutErrorIdentifierRule.php)
+
+A custom rule to report too loose ignore annotations that don't specify an error identifier.
+By default, both `@phpstan-ignore-line` and `@phpstan-ignore-next-line` annotations are monitored.
+
+```neon
+parameters:
+    ignoreAnnotationWithoutErrorIdentifier:
+        # Enable or disable this rule
+        enabled: true
+        # Define monitored annotations (without "@" prefix)
+        monitoredAnnotations:
+            - phpstan-ignore-line
+            - phpstan-ignore-next-line
+```
+
+This rule can also be customized using the PHP API:
+
+```php
+# phpstan.php
+
+use EliasHaeussler\PHPStanConfig;
+
+$config = PHPStanConfig\Config\Config::create(__DIR__);
+$config->parameters->set('ignoreAnnotationWithoutErrorIdentifier/enabled', false);
+$config->parameters->set('ignoreAnnotationWithoutErrorIdentifier/monitoredAnnotations', [
+    // These annotations don't actually exist, this is just for demonstration purposes
+    'phpstan-ignore-start',
+    'phpstan-ignore-end',
+]);
 
 return $config->toArray();
 ```

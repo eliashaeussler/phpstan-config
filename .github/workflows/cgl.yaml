@@ -31,11 +31,15 @@ jobs:
 
       # Install dependencies
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+        run: composer require --no-progress nikic/php-parser:"*" phpstan/phpdoc-parser:"*"
 
       # Check Composer dependencies
       - name: Check dependencies
-        run: composer-require-checker check
+        run: composer-require-checker check --config-file dependency-checker.json
+      - name: Reset composer.json
+        run: git checkout composer.json composer.lock
+      - name: Re-install Composer dependencies
+        uses: ramsey/composer-install@v3
       - name: Check for unused dependencies
         run: composer-unused
 

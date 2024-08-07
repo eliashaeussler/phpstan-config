@@ -1,4 +1,0 @@
-parameters:
-	# Open files in PhpStorm
-	editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
-	editorUrlTitle: '%%relFile%%:%%line%%'

@@ -7,7 +7,7 @@
 /.php-cs-fixer.php        export-ignore
 /CODEOWNERS               export-ignore
 /composer.lock            export-ignore
-/composer-unused.php      export-ignore
+/dependency-checker.json  export-ignore
 /phpstan.php              export-ignore
 /phpunit.xml              export-ignore
 /rector.php               export-ignore
