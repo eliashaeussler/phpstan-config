@@ -436,23 +436,29 @@ final class ConfigTest extends Framework\TestCase
             null,
             ['message' => '#^foo$#'],
         ];
-        yield 'message and path' => [
+        yield 'message and relative path' => [
             'baz',
             null,
             null,
-            ['message' => '#^foo$#', 'path' => 'baz'],
+            ['message' => '#^foo$#', 'path' => '/my-project/baz'],
+        ];
+        yield 'message and absolute path' => [
+            '/foo/baz',
+            null,
+            null,
+            ['message' => '#^foo$#', 'path' => '/foo/baz'],
         ];
         yield 'message, path and count' => [
             'baz',
             3,
             null,
-            ['message' => '#^foo$#', 'path' => 'baz', 'count' => 3],
+            ['message' => '#^foo$#', 'path' => '/my-project/baz', 'count' => 3],
         ];
         yield 'message, path, count and reportUnmatched' => [
             'baz',
             3,
             true,
-            ['message' => '#^foo$#', 'path' => 'baz', 'count' => 3, 'reportUnmatched' => true],
+            ['message' => '#^foo$#', 'path' => '/my-project/baz', 'count' => 3, 'reportUnmatched' => true],
         ];
     }
 }
