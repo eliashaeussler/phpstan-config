@@ -220,7 +220,7 @@ final class Config
         ];
 
         if (null !== $path) {
-            $error['path'] = $path;
+            $error['path'] = $this->expandPath($path);
         }
         if (null !== $count) {
             $error['count'] = $count;
