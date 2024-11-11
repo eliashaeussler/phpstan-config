@@ -102,7 +102,7 @@ final class Config
     }
 
     /**
-     * @param int<0, 9> $level
+     * @param int<0, 10> $level
      *
      * @see https://phpstan.org/config-reference#rule-level
      */
