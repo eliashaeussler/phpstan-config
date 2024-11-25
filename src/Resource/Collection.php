@@ -115,7 +115,7 @@ final class Collection
      */
     private function modifyAtPath(string $path, callable $function): void
     {
-        $pathSegments = str_getcsv($path, $this->pathDelimiter);
+        $pathSegments = str_getcsv($path, $this->pathDelimiter, escape: '\\');
         $reference = &$this->collection;
 
         foreach ($pathSegments as $pathSegment) {
