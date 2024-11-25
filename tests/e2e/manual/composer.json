@@ -1,7 +1,7 @@
 {
 	"name": "eliashaeussler/phpstan-config-test-manual",
 	"require-dev": {
-		"eliashaeussler/php-cs-fixer-config": "^1.1",
+		"eliashaeussler/php-cs-fixer-config": "^2.0",
 		"eliashaeussler/phpstan-config": "99.99.99",
 		"ergebnis/composer-normalize": "^2.29"
 	},
