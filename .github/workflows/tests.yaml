@@ -10,13 +10,14 @@ on:
 
 jobs:
   tests:
-    name: Tests (PHP ${{ matrix.php-version }} & ${{ matrix.dependencies }} dependencies)
+    name: Tests (PHP ${{ matrix.php-version }}, PHPStan v${{ matrix.phpstan-version }} & ${{ matrix.dependencies }} dependencies)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         php-version: ["8.1", "8.2", "8.3", "8.4"]
-        dependencies: ["locked", "highest", "lowest"]
+        phpstan-version: ["1", "2"]
+        dependencies: ["highest", "lowest"]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,6 +35,7 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v3
         with:
+          composer-options: --with=phpstan/phpstan:^${{ matrix.phpstan-version }}
           dependency-versions: ${{ matrix.dependencies }}
 
       # Run tests
