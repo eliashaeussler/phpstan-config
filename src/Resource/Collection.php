@@ -96,6 +96,7 @@ final class Collection
     public function merge(self $other): self
     {
         $clone = clone $this;
+        /* @phpstan-ignore assign.propertyType */
         $clone->collection = array_merge_recursive($clone->collection, $other->collection);
 
         return $clone;
