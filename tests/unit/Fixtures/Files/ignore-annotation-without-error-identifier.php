@@ -21,10 +21,13 @@ declare(strict_types=1);
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-use ComposerUnused\ComposerUnused;
+/**
+ * @param non-empty-string $name
+ */
+function hello(string $name): void
+{
+    echo sprintf('Hello, %s!', $name);
+}
 
-return static function (ComposerUnused\Configuration\Configuration $config): ComposerUnused\Configuration\Configuration {
-    return $config
-        ->addPatternFilter(ComposerUnused\Configuration\PatternFilter::fromString('/phpstan\/.*/'))
-    ;
-};
+// @ignore-next-line
+hello('');

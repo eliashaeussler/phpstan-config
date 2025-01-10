@@ -1,0 +1,27 @@
+parameters:
+	# Open files in PhpStorm
+	editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+	editorUrlTitle: '%%relFile%%:%%line%%'
+
+	# Rules
+	ignoreAnnotationWithoutErrorIdentifier:
+		enabled: true
+		monitoredAnnotations:
+			- phpstan-ignore-line
+			- phpstan-ignore-next-line
+
+parametersSchema:
+	ignoreAnnotationWithoutErrorIdentifier: structure([
+		enabled: bool()
+		monitoredAnnotations: arrayOf(string())
+	])
+
+conditionalTags:
+	EliasHaeussler\PHPStanConfig\Rule\IgnoreAnnotationWithoutErrorIdentifierRule:
+		phpstan.rules.rule: %ignoreAnnotationWithoutErrorIdentifier.enabled%
+
+services:
+	-
+		class: EliasHaeussler\PHPStanConfig\Rule\IgnoreAnnotationWithoutErrorIdentifierRule
+		arguments:
+			monitoredAnnotations: %ignoreAnnotationWithoutErrorIdentifier.monitoredAnnotations%
