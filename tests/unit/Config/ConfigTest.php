@@ -420,6 +420,23 @@ final class ConfigTest extends Framework\TestCase
         self::assertSame($expected, $this->subject->toArray());
     }
 
+    #[Framework\Attributes\Test]
+    public function useCustomRuleEnablesOrDisablesCustomRule(): void
+    {
+        $this->subject->useCustomRule('foo');
+
+        $expected = [
+            'includes' => [],
+            'parameters' => [
+                'foo' => [
+                    'enabled' => true,
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->subject->toArray());
+    }
+
     /**
      * @return Generator<string, array{
      *     non-empty-string|null,
