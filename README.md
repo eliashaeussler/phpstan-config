@@ -107,6 +107,9 @@ $config->formatAs(PHPStanConfig\Enums\ErrorFormat::Json);
 // Treat phpdoc types as certain
 $config->treatPhpDocTypesAsCertain();
 
+// Enable or disable custom rules (see rules below)
+$config->useCustomRule('ignoreAnnotationWithoutErrorIdentifier', false);
+
 // Include Doctrine set
 $doctrineSet = PHPStanConfig\Set\DoctrineSet::create()
     ->withObjectManagerLoader('tests/object-manager.php')

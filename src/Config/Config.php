@@ -294,6 +294,13 @@ final class Config
         return $this;
     }
 
+    public function useCustomRule(string $identifier, bool $enable = true): self
+    {
+        $this->parameters->set($identifier.'/enabled', $enable);
+
+        return $this;
+    }
+
     /**
      * @return array{
      *     includes: list<non-empty-string>,
