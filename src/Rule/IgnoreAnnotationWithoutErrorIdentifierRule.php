@@ -109,8 +109,6 @@ final class IgnoreAnnotationWithoutErrorIdentifierRule implements Rules\Rule
         return $ruleError
             ->identifier('ignoreAnnotation.withoutErrorIdentifier')
             ->tip('Read more at https://phpstan.org/user-guide/ignoring-errors and learn how to properly ignore errors.')
-            ->file($scope->getFile())
-            ->line($node->getStartLine())
             ->nonIgnorable()
             ->build()
         ;
