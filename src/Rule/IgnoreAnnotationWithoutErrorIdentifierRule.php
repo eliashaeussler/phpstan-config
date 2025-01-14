@@ -87,7 +87,7 @@ final class IgnoreAnnotationWithoutErrorIdentifierRule implements Rules\Rule
                     $name = ltrim($phpDocChildNode->name, '@');
 
                     // Add error if ignore annotation has no error identifier configured
-                    if (in_array($name, $this->monitoredAnnotations) && '' === trim((string) $phpDocChildNode->value)) {
+                    if (in_array($name, $this->monitoredAnnotations, true) && '' === trim((string) $phpDocChildNode->value)) {
                         $errors[] = $this->createRuleError($name, $scope, $node);
                     }
                 }
