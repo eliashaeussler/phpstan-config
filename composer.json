@@ -24,7 +24,7 @@
 		"ergebnis/composer-normalize": "^2.29",
 		"nikic/php-parser": "*",
 		"phpstan/phpdoc-parser": "*",
-		"phpunit/phpunit": "^10.1 || ^11.0"
+		"phpunit/phpunit": "^10.1 || ^11.0 || ^12.0"
 	},
 	"autoload": {
 		"psr-4": {
