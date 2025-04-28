@@ -252,20 +252,40 @@ final class ConfigTest extends Framework\TestCase
         self::assertSame($expected, $this->subject->toArray());
     }
 
+    #[Framework\Attributes\Test]
+    public function ignoreErrorThrowsExceptionIfNeitherMessageNorIdentifierAreSet(): void
+    {
+        $this->expectExceptionObject(
+            new Src\Exception\IgnoreErrorEntryIsNotValid(),
+        );
+
+        $this->subject->ignoreError();
+    }
+
     /**
-     * @param non-empty-string|null                                                                         $path
-     * @param positive-int|null                                                                             $count
-     * @param array{message: string, path?: non-empty-string, count?: positive-int, reportUnmatched?: bool} $expected
+     * @param non-empty-string|null $message
+     * @param non-empty-string|null $path
+     * @param positive-int|null     $count
+     * @param non-empty-string|null $identifier
+     * @param array{
+     *     message?: non-empty-string,
+     *     path?: non-empty-string,
+     *     count?: positive-int,
+     *     reportUnmatched?: bool,
+     *     identifier?: non-empty-string,
+     * } $expected
      */
     #[Framework\Attributes\Test]
     #[Framework\Attributes\DataProvider('ignoreErrorConfiguresIgnoreErrorForGivenMessageDataProvider')]
     public function ignoreErrorConfiguresIgnoreErrorForGivenMessage(
+        ?string $message,
         ?string $path,
         ?int $count,
         ?bool $reportUnmatched,
+        ?string $identifier,
         array $expected,
     ): void {
-        $this->subject->ignoreError('foo', $path, $count, $reportUnmatched);
+        $this->subject->ignoreError($message, $path, $count, $reportUnmatched, $identifier);
 
         self::assertSame(
             [
@@ -440,42 +460,76 @@ final class ConfigTest extends Framework\TestCase
     /**
      * @return Generator<string, array{
      *     non-empty-string|null,
+     *     non-empty-string|null,
      *     positive-int|null,
      *     bool|null,
-     *     array{message: string, path?: non-empty-string, count?: positive-int, reportUnmatched?: bool},
+     *     non-empty-string|null,
+     *     array{
+     *         message?: string,
+     *         path?: non-empty-string,
+     *         count?: positive-int,
+     *         reportUnmatched?: bool,
+     *         identifier?: non-empty-string,
+     *     },
      * }>
      */
     public static function ignoreErrorConfiguresIgnoreErrorForGivenMessageDataProvider(): Generator
     {
         yield 'message only' => [
+            'foo',
+            null,
             null,
             null,
             null,
             ['message' => '#^foo$#'],
         ];
         yield 'message and relative path' => [
+            'foo',
             'baz',
+            null,
             null,
             null,
             ['message' => '#^foo$#', 'path' => '/my-project/baz'],
         ];
         yield 'message and absolute path' => [
+            'foo',
             '/foo/baz',
+            null,
             null,
             null,
             ['message' => '#^foo$#', 'path' => '/foo/baz'],
         ];
         yield 'message, path and count' => [
+            'foo',
             'baz',
             3,
+            null,
             null,
             ['message' => '#^foo$#', 'path' => '/my-project/baz', 'count' => 3],
         ];
         yield 'message, path, count and reportUnmatched' => [
+            'foo',
             'baz',
             3,
             true,
+            null,
             ['message' => '#^foo$#', 'path' => '/my-project/baz', 'count' => 3, 'reportUnmatched' => true],
+        ];
+        yield 'message, path, count, reportUnmatched and identifier' => [
+            'foo',
+            'baz',
+            3,
+            true,
+            'boo',
+            ['message' => '#^foo$#', 'path' => '/my-project/baz', 'count' => 3, 'reportUnmatched' => true, 'identifier' => 'boo'],
+        ];
+        yield 'identifier only' => [
+            null,
+            null,
+            null,
+            null,
+            'foo',
+            ['identifier' => 'foo'],
         ];
     }
 }

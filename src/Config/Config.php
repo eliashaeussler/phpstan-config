@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace EliasHaeussler\PHPStanConfig\Config;
 
 use EliasHaeussler\PHPStanConfig\Enums;
+use EliasHaeussler\PHPStanConfig\Exception;
 use EliasHaeussler\PHPStanConfig\Resource;
 use EliasHaeussler\PHPStanConfig\Set;
 
@@ -198,27 +199,36 @@ final class Config
     }
 
     /**
-     * @param non-empty-string      $message
+     * @param non-empty-string|null $message
      * @param non-empty-string|null $path
      * @param positive-int|null     $count
+     * @param non-empty-string|null $identifier
+     *
+     * @throws Exception\IgnoreErrorEntryIsNotValid
      *
      * @see https://phpstan.org/config-reference#ignoring-errors
      */
     public function ignoreError(
-        string $message,
+        ?string $message = null,
         ?string $path = null,
         ?int $count = null,
         ?bool $reportUnmatched = null,
+        ?string $identifier = null,
     ): self {
+        if (null === $message && null === $identifier) {
+            throw new Exception\IgnoreErrorEntryIsNotValid();
+        }
+
         // Convert plain message to regex
-        if (!str_starts_with($message, '#')) {
+        if (null !== $message && !str_starts_with($message, '#')) {
             $message = sprintf('#^%s$#', preg_quote($message, '#'));
         }
 
-        $error = [
-            'message' => $message,
-        ];
+        $error = [];
 
+        if (null !== $message) {
+            $error['message'] = $message;
+        }
         if (null !== $path) {
             $error['path'] = $this->expandPath($path);
         }
@@ -227,6 +237,9 @@ final class Config
         }
         if (null !== $reportUnmatched) {
             $error['reportUnmatched'] = $reportUnmatched;
+        }
+        if (null !== $identifier) {
+            $error['identifier'] = $identifier;
         }
 
         $this->parameters->add('ignoreErrors', $error);
