@@ -31,12 +31,12 @@ use function rtrim;
  * @author Elias Häußler <elias@haeussler.dev>
  * @license GPL-3.0-or-later
  */
-final class Path
+final readonly class Path
 {
     /**
      * @var non-empty-string
      */
-    public readonly string $rootPath;
+    public string $rootPath;
 
     /**
      * @param non-empty-string $rootPath

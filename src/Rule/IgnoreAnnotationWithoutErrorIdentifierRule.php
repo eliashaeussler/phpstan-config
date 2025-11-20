@@ -41,14 +41,14 @@ use function sprintf;
  *
  * @implements Rules\Rule<Node\Stmt>
  */
-final class IgnoreAnnotationWithoutErrorIdentifierRule implements Rules\Rule
+final readonly class IgnoreAnnotationWithoutErrorIdentifierRule implements Rules\Rule
 {
     /**
      * @param list<non-empty-string> $monitoredAnnotations
      */
     public function __construct(
-        private readonly Type\FileTypeMapper $fileTypeMapper,
-        private readonly array $monitoredAnnotations,
+        private Type\FileTypeMapper $fileTypeMapper,
+        private array $monitoredAnnotations,
     ) {}
 
     public function getNodeType(): string
