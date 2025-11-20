@@ -44,19 +44,45 @@ final class ConfigTest extends Framework\TestCase
     }
 
     #[Framework\Attributes\Test]
-    public function createSetInitializesAndReturnsGivenSet(): void
+    public function createSetCreatesAndReturnsGivenSetByClassName(): void
     {
-        $expected = Tests\Fixtures\DummySet::create();
-        $expected->setProjectPath(new Src\Resource\Path('/my-project'));
+        $this->subject->createSet(Tests\Fixtures\DummySet::class);
 
-        $actual = $this->subject->createSet(Tests\Fixtures\DummySet::class);
-
-        self::assertEquals($expected, $actual);
         self::assertSame(
             [
                 'includes' => [],
                 'parameters' => [
                     'foo' => 'baz',
+                ],
+            ],
+            $this->subject->toArray(),
+        );
+    }
+
+    #[Framework\Attributes\Test]
+    public function createSetInitializesAndReturnsGivenSet(): void
+    {
+        $validated = false;
+
+        $this->subject->createSet(
+            static function (Tests\Fixtures\DummySet $set) use (&$validated) {
+                $validated = true;
+
+                $expected = Tests\Fixtures\DummySet::create();
+                $expected->setProjectPath(new Src\Resource\Path('/my-project'));
+
+                self::assertEquals($expected, $set);
+
+                $set->parameters = ['baz' => 'foo'];
+            },
+        );
+
+        self::assertTrue($validated);
+        self::assertSame(
+            [
+                'includes' => [],
+                'parameters' => [
+                    'baz' => 'foo',
                 ],
             ],
             $this->subject->toArray(),
