@@ -177,7 +177,7 @@ final class ConfigTest extends Framework\TestCase
 
         $expected = [
             'includes' => [
-                'phpstan-baseline.neon',
+                '/my-project/phpstan-baseline.neon',
             ],
             'parameters' => [],
         ];
@@ -192,8 +192,8 @@ final class ConfigTest extends Framework\TestCase
 
         $expected = [
             'includes' => [
-                'foo',
-                'baz',
+                '/my-project/foo',
+                '/my-project/baz',
             ],
             'parameters' => [],
         ];
@@ -245,7 +245,7 @@ final class ConfigTest extends Framework\TestCase
         $expected = [
             'includes' => [],
             'parameters' => [
-                'tmpDir' => 'foo',
+                'tmpDir' => '/my-project/foo',
             ],
         ];
 
