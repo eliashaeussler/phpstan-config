@@ -156,7 +156,7 @@ final class Config
     public function with(string ...$files): self
     {
         foreach ($files as $file) {
-            $this->includes[] = $file;
+            $this->includes[] = $this->expandPath($file);
         }
 
         return $this;
@@ -169,6 +169,8 @@ final class Config
      */
     public function bootstrapFiles(string ...$files): self
     {
+        $paths = array_map($this->expandPath(...), $files);
+
         $this->parameters->add('bootstrapFiles', ...$files);
 
         return $this;
@@ -181,6 +183,8 @@ final class Config
      */
     public function stubFiles(string ...$files): self
     {
+        $paths = array_map($this->expandPath(...), $files);
+
         $this->parameters->add('stubFiles', ...$files);
 
         return $this;
@@ -193,7 +197,7 @@ final class Config
      */
     public function useCacheDir(string $cacheDir): self
     {
-        $this->parameters->set('tmpDir', $cacheDir);
+        $this->parameters->set('tmpDir', $this->expandPath($cacheDir));
 
         return $this;
     }
