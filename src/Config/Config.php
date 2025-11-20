@@ -23,12 +23,16 @@ declare(strict_types=1);
 
 namespace EliasHaeussler\PHPStanConfig\Config;
 
+use Closure;
 use EliasHaeussler\PHPStanConfig\Enums;
 use EliasHaeussler\PHPStanConfig\Exception;
 use EliasHaeussler\PHPStanConfig\Resource;
 use EliasHaeussler\PHPStanConfig\Set;
+use ReflectionFunction;
+use ReflectionNamedType;
 
 use function array_map;
+use function is_a;
 use function preg_quote;
 use function sprintf;
 use function str_starts_with;
@@ -70,21 +74,45 @@ final class Config
     /**
      * @template T of Set\Set
      *
-     * @param class-string<T> $className
+     * @param Closure(T, self): void|class-string<T> $configuratorOrClassName
      *
-     * @return T
+     * @throws Exception\SetConfiguratorIsNotValid
      */
-    public function createSet(string $className): Set\Set
+    public function createSet(Closure|string $configuratorOrClassName): self
     {
+        if ($configuratorOrClassName instanceof Closure) {
+            $reflection = new ReflectionFunction($configuratorOrClassName);
+            $type = $reflection->getParameters()[0]->getType();
+
+            if (!($type instanceof ReflectionNamedType)) {
+                throw new Exception\SetConfiguratorIsNotValid();
+            }
+
+            $className = $type->getName();
+            $configurator = $configuratorOrClassName;
+        } else {
+            $className = $configuratorOrClassName;
+            $configurator = null;
+        }
+
+        if (!is_a($className, Set\Set::class, true)) {
+            throw new Exception\SetConfiguratorIsNotValid();
+        }
+
+        /** @var T $set */
         $set = $className::create();
 
         if ($set instanceof Set\PathAwareSet) {
             $set->setProjectPath($this->projectPath);
         }
 
+        if (null !== $configurator) {
+            $configurator($set, $this);
+        }
+
         $this->withSets($set);
 
-        return $set;
+        return $this;
     }
 
     public function withSets(Set\Set ...$sets): self

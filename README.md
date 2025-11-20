@@ -48,7 +48,7 @@ The package provides a PHP configuration API for PHPStan. Add this
 to your `phpstan.php` file:
 
 ```php
-# phpstan.php
+// phpstan.php
 
 use EliasHaeussler\PHPStanConfig;
 
@@ -110,18 +110,22 @@ $config->treatPhpDocTypesAsCertain();
 $config->useCustomRule('ignoreAnnotationWithoutErrorIdentifier', false);
 
 // Include Doctrine set
-$config->createSet(PHPStanConfig\Set\DoctrineSet::class)
-    ->withObjectManagerLoader('tests/object-manager.php')
-    ->withOrmRepositoryClass(\MyApp\Doctrine\BetterEntityRepository::class)
-    ->withOdmRepositoryClass(\MyApp\Doctrine\BetterDocumentRepository::class)
-;
+$config->createSet(
+    static function (PHPStanConfig\Set\DoctrineSet $set): void {
+        $set->withObjectManagerLoader('tests/object-manager.php');
+        $set->withOrmRepositoryClass(\MyApp\Doctrine\BetterEntityRepository::class);
+        $set->withOdmRepositoryClass(\MyApp\Doctrine\BetterDocumentRepository::class);
+    },
+);
 
 // Include Symfony set
-$config->createSet(PHPStanConfig\Set\SymfonySet::class)
-    ->withConsoleApplicationLoader('tests/build/console-application.php')
-    ->withContainerXmlPath('var/cache/test-container.xml')
-    ->disableConstantHassers()
-;
+$config->createSet(
+    static function (PHPStanConfig\Set\SymfonySet $set): void {
+        $set->withConsoleApplicationLoader('tests/build/console-application.php');
+        $set->withContainerXmlPath('var/cache/test-container.xml');
+        $set->disableConstantHassers();
+    },
+);
 
 // Include TYPO3 set
 $typo3Set = PHPStanConfig\Set\TYPO3Set::create()
