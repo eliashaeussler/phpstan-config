@@ -33,13 +33,15 @@ use EliasHaeussler\PHPStanConfig\Resource;
  *
  * @see https://github.com/phpstan/phpstan-symfony
  */
-final class SymfonySet implements ParameterizableSet
+final class SymfonySet implements ParameterizableSet, PathAwareSet
 {
+    private Resource\Path $projectPath;
+
     private function __construct(
         private readonly Resource\Collection $parameters,
     ) {}
 
-    public static function create(): self
+    public static function create(): static
     {
         return new self(
             Resource\Collection::create(),
@@ -53,7 +55,7 @@ final class SymfonySet implements ParameterizableSet
      */
     public function withConsoleApplicationLoader(string $file): self
     {
-        $this->parameters->set('symfony/consoleApplicationLoader', $file);
+        $this->parameters->set('symfony/consoleApplicationLoader', $this->projectPath->resolve($file));
 
         return $this;
     }
@@ -65,7 +67,7 @@ final class SymfonySet implements ParameterizableSet
      */
     public function withContainerXmlPath(string $file): self
     {
-        $this->parameters->set('symfony/containerXmlPath', $file);
+        $this->parameters->set('symfony/containerXmlPath', $this->projectPath->resolve($file));
 
         return $this;
     }
@@ -83,5 +85,10 @@ final class SymfonySet implements ParameterizableSet
     public function getParameters(): Resource\Collection
     {
         return $this->parameters;
+    }
+
+    public function setProjectPath(Resource\Path $projectPath): void
+    {
+        $this->projectPath = $projectPath;
     }
 }

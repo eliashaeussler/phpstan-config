@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace EliasHaeussler\PHPStanConfig\Tests\Config;
 
 use EliasHaeussler\PHPStanConfig as Src;
+use EliasHaeussler\PHPStanConfig\Tests;
 use Generator;
 use PHPUnit\Framework;
 
@@ -39,15 +40,35 @@ final class ConfigTest extends Framework\TestCase
 
     protected function setUp(): void
     {
-        $this->subject = Src\Config\Config::create('/my-project/');
+        $this->subject = Src\Config\Config::create('/my-project');
+    }
+
+    #[Framework\Attributes\Test]
+    public function createSetInitializesAndReturnsGivenSet(): void
+    {
+        $expected = Tests\Fixtures\DummySet::create();
+        $expected->setProjectPath(new Src\Resource\Path('/my-project'));
+
+        $actual = $this->subject->createSet(Tests\Fixtures\DummySet::class);
+
+        self::assertEquals($expected, $actual);
+        self::assertSame(
+            [
+                'includes' => [],
+                'parameters' => [
+                    'foo' => 'baz',
+                ],
+            ],
+            $this->subject->toArray(),
+        );
     }
 
     #[Framework\Attributes\Test]
     public function withSetsIntegratesGivenSetsIntoConfig(): void
     {
         $sets = [
-            new Src\Tests\Fixtures\DummySet(),
-            new Src\Tests\Fixtures\DummySet(['baz' => 'foo']),
+            Tests\Fixtures\DummySet::create(),
+            Tests\Fixtures\DummySet::create(['baz' => 'foo']),
         ];
 
         $this->subject->withSets(...$sets);

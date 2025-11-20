@@ -21,45 +21,44 @@ declare(strict_types=1);
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-namespace EliasHaeussler\PHPStanConfig\Tests\Fixtures;
+namespace EliasHaeussler\PHPStanConfig\Resource;
 
-use EliasHaeussler\PHPStanConfig\Resource;
-use EliasHaeussler\PHPStanConfig\Set;
+use function rtrim;
 
 /**
- * DummySet.
+ * Path.
  *
  * @author Elias Häußler <elias@haeussler.dev>
  * @license GPL-3.0-or-later
- *
- * @internal
  */
-final class DummySet implements Set\ParameterizableSet, Set\PathAwareSet
+final class Path
 {
-    public ?Resource\Path $projectPath = null;
+    /**
+     * @var non-empty-string
+     */
+    public readonly string $rootPath;
 
     /**
-     * @param array<non-empty-string, mixed> $parameters
+     * @param non-empty-string $rootPath
      */
-    private function __construct(
-        public array $parameters = ['foo' => 'baz'],
-    ) {}
+    public function __construct(string $rootPath)
+    {
+        $this->rootPath = rtrim($rootPath, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+    }
 
     /**
-     * @param array<non-empty-string, mixed> $parameters
+     * @param non-empty-string $path
+     *
+     * @return non-empty-string
      */
-    public static function create(array $parameters = ['foo' => 'baz']): static
+    public function resolve(string $path): string
     {
-        return new self($parameters);
-    }
+        foreach ([DIRECTORY_SEPARATOR, 'phar://'] as $pathPrefix) {
+            if (str_starts_with($path, $pathPrefix)) {
+                return $path;
+            }
+        }
 
-    public function getParameters(): Resource\Collection
-    {
-        return Resource\Collection::fromArray($this->parameters);
-    }
-
-    public function setProjectPath(Resource\Path $projectPath): void
-    {
-        $this->projectPath = $projectPath;
+        return $this->rootPath.$path;
     }
 }

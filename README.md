@@ -111,18 +111,18 @@ $config->treatPhpDocTypesAsCertain();
 $config->useCustomRule('ignoreAnnotationWithoutErrorIdentifier', false);
 
 // Include Doctrine set
-$doctrineSet = PHPStanConfig\Set\DoctrineSet::create()
+$config->createSet(PHPStanConfig\Set\DoctrineSet::class)
     ->withObjectManagerLoader('tests/object-manager.php')
     ->withOrmRepositoryClass(\MyApp\Doctrine\BetterEntityRepository::class)
     ->withOdmRepositoryClass(\MyApp\Doctrine\BetterDocumentRepository::class)
-$config->withSets($doctrineSet);
+;
 
 // Include Symfony set
-$symfonySet = PHPStanConfig\Set\SymfonySet::create()
+$config->createSet(PHPStanConfig\Set\SymfonySet::class)
     ->withConsoleApplicationLoader('tests/build/console-application.php')
     ->withContainerXmlPath('var/cache/test-container.xml')
-    ->disableConstantHassers();
-$config->withSets($symfonySet);
+    ->disableConstantHassers()
+;
 
 // Include TYPO3 set
 $typo3Set = PHPStanConfig\Set\TYPO3Set::create()
