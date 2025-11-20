@@ -110,7 +110,7 @@ $config->treatPhpDocTypesAsCertain();
 $config->useCustomRule('ignoreAnnotationWithoutErrorIdentifier', false);
 
 // Include Doctrine set
-$config->createSet(
+$config->withSet(
     static function (PHPStanConfig\Set\DoctrineSet $set): void {
         $set->withObjectManagerLoader('tests/object-manager.php');
         $set->withOrmRepositoryClass(\MyApp\Doctrine\BetterEntityRepository::class);
@@ -119,7 +119,7 @@ $config->createSet(
 );
 
 // Include Symfony set
-$config->createSet(
+$config->withSet(
     static function (PHPStanConfig\Set\SymfonySet $set): void {
         $set->withConsoleApplicationLoader('tests/build/console-application.php');
         $set->withContainerXmlPath('var/cache/test-container.xml');
