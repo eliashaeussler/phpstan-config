@@ -46,7 +46,7 @@ final class ConfigTest extends Framework\TestCase
     #[Framework\Attributes\Test]
     public function createSetCreatesAndReturnsGivenSetByClassName(): void
     {
-        $this->subject->createSet(Tests\Fixtures\DummySet::class);
+        $this->subject->withSet(Tests\Fixtures\DummySet::class);
 
         self::assertSame(
             [
@@ -64,7 +64,7 @@ final class ConfigTest extends Framework\TestCase
     {
         $validated = false;
 
-        $this->subject->createSet(
+        $this->subject->withSet(
             static function (Tests\Fixtures\DummySet $set) use (&$validated) {
                 $validated = true;
 

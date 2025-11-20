@@ -78,7 +78,7 @@ final class Config
      *
      * @throws Exception\SetConfiguratorIsNotValid
      */
-    public function createSet(Closure|string $configuratorOrClassName): self
+    public function withSet(Closure|string $configuratorOrClassName): self
     {
         if ($configuratorOrClassName instanceof Closure) {
             $reflection = new ReflectionFunction($configuratorOrClassName);
