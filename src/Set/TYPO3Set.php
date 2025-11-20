@@ -39,7 +39,7 @@ final class TYPO3Set implements ParameterizableSet
         private readonly Resource\Collection $parameters,
     ) {}
 
-    public static function create(): self
+    public static function create(): static
     {
         return new self(
             Resource\Collection::create(),

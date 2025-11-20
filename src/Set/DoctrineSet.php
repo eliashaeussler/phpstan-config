@@ -33,13 +33,15 @@ use EliasHaeussler\PHPStanConfig\Resource;
  *
  * @see https://github.com/phpstan/phpstan-doctrine
  */
-final class DoctrineSet implements ParameterizableSet
+final class DoctrineSet implements ParameterizableSet, PathAwareSet
 {
+    private Resource\Path $projectPath;
+
     private function __construct(
         private readonly Resource\Collection $parameters,
     ) {}
 
-    public static function create(): self
+    public static function create(): static
     {
         return new self(
             Resource\Collection::create(),
@@ -53,7 +55,7 @@ final class DoctrineSet implements ParameterizableSet
      */
     public function withObjectManagerLoader(string $file): self
     {
-        $this->parameters->set('doctrine/objectManagerLoader', $file);
+        $this->parameters->set('doctrine/objectManagerLoader', $this->projectPath->resolve($file));
 
         return $this;
     }
@@ -85,5 +87,10 @@ final class DoctrineSet implements ParameterizableSet
     public function getParameters(): Resource\Collection
     {
         return $this->parameters;
+    }
+
+    public function setProjectPath(Resource\Path $projectPath): void
+    {
+        $this->projectPath = $projectPath;
     }
 }

@@ -29,4 +29,7 @@ namespace EliasHaeussler\PHPStanConfig\Set;
  * @author Elias Häußler <elias@haeussler.dev>
  * @license GPL-3.0-or-later
  */
-interface Set {}
+interface Set
+{
+    public static function create(): static;
+}

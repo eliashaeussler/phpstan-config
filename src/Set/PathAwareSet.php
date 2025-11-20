@@ -21,45 +21,17 @@ declare(strict_types=1);
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-namespace EliasHaeussler\PHPStanConfig\Tests\Fixtures;
+namespace EliasHaeussler\PHPStanConfig\Set;
 
 use EliasHaeussler\PHPStanConfig\Resource;
-use EliasHaeussler\PHPStanConfig\Set;
 
 /**
- * DummySet.
+ * PathAwareSet.
  *
  * @author Elias Häußler <elias@haeussler.dev>
  * @license GPL-3.0-or-later
- *
- * @internal
  */
-final class DummySet implements Set\ParameterizableSet, Set\PathAwareSet
+interface PathAwareSet extends Set
 {
-    public ?Resource\Path $projectPath = null;
-
-    /**
-     * @param array<non-empty-string, mixed> $parameters
-     */
-    private function __construct(
-        public array $parameters = ['foo' => 'baz'],
-    ) {}
-
-    /**
-     * @param array<non-empty-string, mixed> $parameters
-     */
-    public static function create(array $parameters = ['foo' => 'baz']): static
-    {
-        return new self($parameters);
-    }
-
-    public function getParameters(): Resource\Collection
-    {
-        return Resource\Collection::fromArray($this->parameters);
-    }
-
-    public function setProjectPath(Resource\Path $projectPath): void
-    {
-        $this->projectPath = $projectPath;
-    }
+    public function setProjectPath(Resource\Path $projectPath): void;
 }

@@ -30,7 +30,6 @@ use EliasHaeussler\PHPStanConfig\Set;
 
 use function array_map;
 use function preg_quote;
-use function rtrim;
 use function sprintf;
 use function str_starts_with;
 
@@ -43,15 +42,18 @@ use function str_starts_with;
 final class Config
 {
     /**
-     * @param non-empty-string       $projectDirectory
-     * @param list<non-empty-string> $includes
-     * @param list<Set\Set>          $sets
+     * @var list<non-empty-string>
      */
+    private array $includes = [];
+
+    /**
+     * @var list<Set\Set>
+     */
+    private array $sets = [];
+
     private function __construct(
-        private readonly string $projectDirectory,
+        private readonly Resource\Path $projectPath,
         public readonly Resource\Collection $parameters,
-        private array $includes = [],
-        private array $sets = [],
     ) {}
 
     /**
@@ -60,9 +62,29 @@ final class Config
     public static function create(string $projectDirectory): self
     {
         return new self(
-            rtrim($projectDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR,
+            new Resource\Path($projectDirectory),
             Resource\Collection::create(),
         );
+    }
+
+    /**
+     * @template T of Set\Set
+     *
+     * @param class-string<T> $className
+     *
+     * @return T
+     */
+    public function createSet(string $className): Set\Set
+    {
+        $set = $className::create();
+
+        if ($set instanceof Set\PathAwareSet) {
+            $set->setProjectPath($this->projectPath);
+        }
+
+        $this->withSets($set);
+
+        return $set;
     }
 
     public function withSets(Set\Set ...$sets): self
@@ -81,7 +103,7 @@ final class Config
      */
     public function in(string ...$paths): self
     {
-        $paths = array_map($this->expandPath(...), $paths);
+        $paths = array_map($this->projectPath->resolve(...), $paths);
 
         $this->parameters->add('paths', ...$paths);
 
@@ -95,7 +117,7 @@ final class Config
      */
     public function not(string ...$paths): self
     {
-        $paths = array_map($this->expandPath(...), $paths);
+        $paths = array_map($this->projectPath->resolve(...), $paths);
 
         $this->parameters->add('excludePaths/analyseAndScan', ...$paths);
 
@@ -156,7 +178,7 @@ final class Config
     public function with(string ...$files): self
     {
         foreach ($files as $file) {
-            $this->includes[] = $this->expandPath($file);
+            $this->includes[] = $this->projectPath->resolve($file);
         }
 
         return $this;
@@ -169,7 +191,7 @@ final class Config
      */
     public function bootstrapFiles(string ...$files): self
     {
-        $paths = array_map($this->expandPath(...), $files);
+        $paths = array_map($this->projectPath->resolve(...), $files);
 
         $this->parameters->add('bootstrapFiles', ...$files);
 
@@ -183,7 +205,7 @@ final class Config
      */
     public function stubFiles(string ...$files): self
     {
-        $paths = array_map($this->expandPath(...), $files);
+        $paths = array_map($this->projectPath->resolve(...), $files);
 
         $this->parameters->add('stubFiles', ...$files);
 
@@ -197,7 +219,7 @@ final class Config
      */
     public function useCacheDir(string $cacheDir): self
     {
-        $this->parameters->set('tmpDir', $this->expandPath($cacheDir));
+        $this->parameters->set('tmpDir', $this->projectPath->resolve($cacheDir));
 
         return $this;
     }
@@ -234,7 +256,7 @@ final class Config
             $error['message'] = $message;
         }
         if (null !== $path) {
-            $error['path'] = $this->expandPath($path);
+            $error['path'] = $this->projectPath->resolve($path);
         }
         if (null !== $count) {
             $error['count'] = $count;
@@ -338,21 +360,5 @@ final class Config
             'includes' => $this->includes,
             'parameters' => $parameters->toArray(),
         ];
-    }
-
-    /**
-     * @param non-empty-string $path
-     *
-     * @return non-empty-string
-     */
-    private function expandPath(string $path): string
-    {
-        foreach ([DIRECTORY_SEPARATOR, 'phar://'] as $pathPrefix) {
-            if (str_starts_with($path, $pathPrefix)) {
-                return $path;
-            }
-        }
-
-        return $this->projectDirectory.$path;
     }
 }

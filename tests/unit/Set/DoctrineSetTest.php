@@ -39,6 +39,7 @@ final class DoctrineSetTest extends Framework\TestCase
     protected function setUp(): void
     {
         $this->subject = Src\Set\DoctrineSet::create();
+        $this->subject->setProjectPath(new Src\Resource\Path('/my-project'));
     }
 
     #[Framework\Attributes\Test]
@@ -57,7 +58,7 @@ final class DoctrineSetTest extends Framework\TestCase
         self::assertSame(
             [
                 'doctrine' => [
-                    'objectManagerLoader' => 'foo',
+                    'objectManagerLoader' => '/my-project/foo',
                 ],
             ],
             $this->subject->getParameters()->toArray(),

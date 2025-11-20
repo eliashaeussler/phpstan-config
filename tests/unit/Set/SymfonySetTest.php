@@ -39,6 +39,7 @@ final class SymfonySetTest extends Framework\TestCase
     protected function setUp(): void
     {
         $this->subject = Src\Set\SymfonySet::create();
+        $this->subject->setProjectPath(new Src\Resource\Path('/my-project'));
     }
 
     #[Framework\Attributes\Test]
@@ -57,7 +58,7 @@ final class SymfonySetTest extends Framework\TestCase
         self::assertSame(
             [
                 'symfony' => [
-                    'consoleApplicationLoader' => 'foo',
+                    'consoleApplicationLoader' => '/my-project/foo',
                 ],
             ],
             $this->subject->getParameters()->toArray(),
@@ -72,7 +73,7 @@ final class SymfonySetTest extends Framework\TestCase
         self::assertSame(
             [
                 'symfony' => [
-                    'containerXmlPath' => 'foo',
+                    'containerXmlPath' => '/my-project/foo',
                 ],
             ],
             $this->subject->getParameters()->toArray(),

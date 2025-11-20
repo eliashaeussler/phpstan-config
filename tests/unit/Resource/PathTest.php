@@ -21,45 +21,42 @@ declare(strict_types=1);
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-namespace EliasHaeussler\PHPStanConfig\Tests\Fixtures;
+namespace EliasHaeussler\PHPStanConfig\Tests\Resource;
 
-use EliasHaeussler\PHPStanConfig\Resource;
-use EliasHaeussler\PHPStanConfig\Set;
+use EliasHaeussler\PHPStanConfig as Src;
+use PHPUnit\Framework;
 
 /**
- * DummySet.
+ * PathTest.
  *
  * @author Elias Häußler <elias@haeussler.dev>
  * @license GPL-3.0-or-later
- *
- * @internal
  */
-final class DummySet implements Set\ParameterizableSet, Set\PathAwareSet
+#[Framework\Attributes\CoversClass(Src\Resource\Path::class)]
+final class PathTest extends Framework\TestCase
 {
-    public ?Resource\Path $projectPath = null;
+    private Src\Resource\Path $subject;
 
-    /**
-     * @param array<non-empty-string, mixed> $parameters
-     */
-    private function __construct(
-        public array $parameters = ['foo' => 'baz'],
-    ) {}
-
-    /**
-     * @param array<non-empty-string, mixed> $parameters
-     */
-    public static function create(array $parameters = ['foo' => 'baz']): static
+    public function setUp(): void
     {
-        return new self($parameters);
+        $this->subject = new Src\Resource\Path('/my-project');
     }
 
-    public function getParameters(): Resource\Collection
+    #[Framework\Attributes\Test]
+    public function resolveReturnsGivenAbsolutePath(): void
     {
-        return Resource\Collection::fromArray($this->parameters);
+        self::assertSame('/foo', $this->subject->resolve('/foo'));
     }
 
-    public function setProjectPath(Resource\Path $projectPath): void
+    #[Framework\Attributes\Test]
+    public function resolveReturnsGivenPharPath(): void
     {
-        $this->projectPath = $projectPath;
+        self::assertSame('/foo', $this->subject->resolve('/foo'));
+    }
+
+    #[Framework\Attributes\Test]
+    public function resolveReturnsResolvedRelativePath(): void
+    {
+        self::assertSame('/my-project/foo', $this->subject->resolve('foo'));
     }
 }
