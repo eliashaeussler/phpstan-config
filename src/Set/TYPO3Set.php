@@ -33,10 +33,10 @@ use EliasHaeussler\PHPStanConfig\Resource;
  *
  * @see https://github.com/sascha-egerer/phpstan-typo3
  */
-final class TYPO3Set implements ParameterizableSet
+final readonly class TYPO3Set implements ParameterizableSet
 {
     private function __construct(
-        private readonly Resource\Collection $parameters,
+        private Resource\Collection $parameters,
     ) {}
 
     public static function create(): static
