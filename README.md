@@ -3,7 +3,6 @@
 # PHPStan config
 
 [![Coverage](https://img.shields.io/coverallsCoverage/github/eliashaeussler/phpstan-config?logo=coveralls)](https://coveralls.io/github/eliashaeussler/phpstan-config)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/eliashaeussler/phpstan-config?logo=codeclimate)](https://codeclimate.com/github/eliashaeussler/phpstan-config/maintainability)
 [![CGL](https://img.shields.io/github/actions/workflow/status/eliashaeussler/phpstan-config/cgl.yaml?label=cgl&logo=github)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/cgl.yaml)
 [![Tests](https://img.shields.io/github/actions/workflow/status/eliashaeussler/phpstan-config/tests.yaml?label=tests&logo=github)](https://github.com/eliashaeussler/phpstan-config/actions/workflows/tests.yaml)
 [![Supported PHP Versions](https://img.shields.io/packagist/dependency-v/eliashaeussler/phpstan-config/php?logo=php)](https://packagist.org/packages/eliashaeussler/phpstan-config)
