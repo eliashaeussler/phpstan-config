@@ -257,8 +257,8 @@ final class ConfigTest extends Framework\TestCase
             'includes' => [],
             'parameters' => [
                 'bootstrapFiles' => [
-                    'foo',
-                    'baz',
+                    '/my-project/foo',
+                    '/my-project/baz',
                 ],
             ],
         ];
@@ -275,8 +275,8 @@ final class ConfigTest extends Framework\TestCase
             'includes' => [],
             'parameters' => [
                 'stubFiles' => [
-                    'foo',
-                    'baz',
+                    '/my-project/foo',
+                    '/my-project/baz',
                 ],
             ],
         ];
