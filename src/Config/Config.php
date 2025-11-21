@@ -221,7 +221,7 @@ final class Config
     {
         $paths = array_map($this->projectPath->resolve(...), $files);
 
-        $this->parameters->add('bootstrapFiles', ...$files);
+        $this->parameters->add('bootstrapFiles', ...$paths);
 
         return $this;
     }
@@ -235,7 +235,7 @@ final class Config
     {
         $paths = array_map($this->projectPath->resolve(...), $files);
 
-        $this->parameters->add('stubFiles', ...$files);
+        $this->parameters->add('stubFiles', ...$paths);
 
         return $this;
     }
