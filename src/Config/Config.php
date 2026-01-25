@@ -84,7 +84,7 @@ final class Config
             $reflection = new ReflectionFunction($configuratorOrClassName);
             $type = $reflection->getParameters()[0]->getType();
 
-            if (!($type instanceof ReflectionNamedType)) {
+            if (!$type instanceof ReflectionNamedType) {
                 throw new Exception\SetConfiguratorIsNotValid();
             }
 

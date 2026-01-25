@@ -80,7 +80,7 @@ final readonly class IgnoreAnnotationWithoutErrorIdentifierRule implements Rules
             foreach ($resolvedPhpDoc->getPhpDocNodes() as $phpDocNode) {
                 foreach ($phpDocNode->children as $phpDocChildNode) {
                     // We only check phpdoc tag nodes
-                    if (!($phpDocChildNode instanceof PhpDocParser\Ast\PhpDoc\PhpDocTagNode)) {
+                    if (!$phpDocChildNode instanceof PhpDocParser\Ast\PhpDoc\PhpDocTagNode) {
                         continue;
                     }
 
