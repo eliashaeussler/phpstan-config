@@ -110,6 +110,48 @@ final class ConfigTest extends Framework\TestCase
         self::assertSame($expected, $this->subject->toArray());
     }
 
+    /**
+     * @param class-string<Src\Rule\CustomRule>|non-empty-string $rule
+     */
+    #[Framework\Attributes\Test]
+    #[Framework\Attributes\DataProvider('customRuleDataProvider')]
+    public function withRuleEnablesGivenRule(string $rule): void
+    {
+        $this->subject->withRule($rule);
+
+        $expected = [
+            'includes' => [],
+            'parameters' => [
+                'dummy' => [
+                    'enabled' => true,
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->subject->toArray());
+    }
+
+    /**
+     * @param class-string<Src\Rule\CustomRule>|non-empty-string $rule
+     */
+    #[Framework\Attributes\Test]
+    #[Framework\Attributes\DataProvider('customRuleDataProvider')]
+    public function withoutRuleDisabledGivenRule(string $rule): void
+    {
+        $this->subject->withoutRule($rule);
+
+        $expected = [
+            'includes' => [],
+            'parameters' => [
+                'dummy' => [
+                    'enabled' => false,
+                ],
+            ],
+        ];
+
+        self::assertSame($expected, $this->subject->toArray());
+    }
+
     #[Framework\Attributes\Test]
     public function inConfiguresPaths(): void
     {
@@ -502,6 +544,15 @@ final class ConfigTest extends Framework\TestCase
         ];
 
         self::assertSame($expected, $this->subject->toArray());
+    }
+
+    /**
+     * @return Generator<string, array{class-string<Src\Rule\CustomRule>|non-empty-string}>
+     */
+    public static function customRuleDataProvider(): Generator
+    {
+        yield 'FQCN' => [Tests\Fixtures\DummyRule::class];
+        yield 'identifier' => ['dummy'];
     }
 
     /**
