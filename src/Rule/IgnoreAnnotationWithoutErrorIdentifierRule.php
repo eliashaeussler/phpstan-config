@@ -39,9 +39,9 @@ use function sprintf;
  * @author Elias Häußler <elias@haeussler.dev>
  * @license GPL-3.0-or-later
  *
- * @implements Rules\Rule<Node\Stmt>
+ * @implements CustomRule<Node\Stmt>
  */
-final readonly class IgnoreAnnotationWithoutErrorIdentifierRule implements Rules\Rule
+final readonly class IgnoreAnnotationWithoutErrorIdentifierRule implements CustomRule
 {
     /**
      * @param list<non-empty-string> $monitoredAnnotations
@@ -50,6 +50,11 @@ final readonly class IgnoreAnnotationWithoutErrorIdentifierRule implements Rules
         private Type\FileTypeMapper $fileTypeMapper,
         private array $monitoredAnnotations,
     ) {}
+
+    public static function getIdentifier(): string
+    {
+        return 'ignoreAnnotationWithoutErrorIdentifier';
+    }
 
     public function getNodeType(): string
     {

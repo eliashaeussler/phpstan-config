@@ -27,6 +27,7 @@ use Closure;
 use EliasHaeussler\PHPStanConfig\Enums;
 use EliasHaeussler\PHPStanConfig\Exception;
 use EliasHaeussler\PHPStanConfig\Resource;
+use EliasHaeussler\PHPStanConfig\Rule;
 use EliasHaeussler\PHPStanConfig\Set;
 use ReflectionFunction;
 use ReflectionNamedType;
@@ -120,6 +121,34 @@ final class Config
         foreach ($sets as $set) {
             $this->sets[] = $set;
         }
+
+        return $this;
+    }
+
+    /**
+     * @param class-string<Rule\CustomRule>|non-empty-string $rule
+     */
+    public function withRule(string $rule): self
+    {
+        if (is_a($rule, Rule\CustomRule::class, true)) {
+            $rule = $rule::getIdentifier();
+        }
+
+        $this->parameters->set($rule.'/enabled', true);
+
+        return $this;
+    }
+
+    /**
+     * @param class-string<Rule\CustomRule>|non-empty-string $rule
+     */
+    public function withoutRule(string $rule): self
+    {
+        if (is_a($rule, Rule\CustomRule::class, true)) {
+            $rule = $rule::getIdentifier();
+        }
+
+        $this->parameters->set($rule.'/enabled', false);
 
         return $this;
     }
