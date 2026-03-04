@@ -1,0 +1,25 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: Cannot access offset mixed on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: ext_emconf.php
+
+		-
+			rawMessage: Implicit array creation is not allowed - variable $EM_CONF might not exist.
+			identifier: variable.implicitArray
+			count: 1
+			path: ext_emconf.php
+
+		-
+			rawMessage: Suggested extension "sitemap_locator" is not reflected in composer.json file.
+			identifier: composerJson.missing.suggest
+			count: 1
+			path: ext_emconf.php
+
+		-
+			rawMessage: Variable $_EXTKEY might not be defined.
+			identifier: variable.undefined
+			count: 1
+			path: ext_emconf.php

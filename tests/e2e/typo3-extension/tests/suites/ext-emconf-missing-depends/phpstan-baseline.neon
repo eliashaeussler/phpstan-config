@@ -1,0 +1,25 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: Required Composer package "eliashaeussler/typo3-sitemap-locator" is not reflected in ext_emconf.php file.
+			identifier: extEmConf.missing.depends
+			count: 1
+			path: composer.json
+
+		-
+			rawMessage: Cannot access offset mixed on mixed.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: ext_emconf.php
+
+		-
+			rawMessage: Implicit array creation is not allowed - variable $EM_CONF might not exist.
+			identifier: variable.implicitArray
+			count: 1
+			path: ext_emconf.php
+
+		-
+			rawMessage: Variable $_EXTKEY might not be defined.
+			identifier: variable.undefined
+			count: 1
+			path: ext_emconf.php

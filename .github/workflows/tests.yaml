@@ -103,7 +103,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: ["extension-installer", "manual"]
+        suite: ["extension-installer", "manual", "typo3-extension"]
     steps:
       - uses: actions/checkout@v6
         with:
