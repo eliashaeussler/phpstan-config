@@ -1,0 +1,15 @@
+{
+	"packages": [
+		{
+			"name": "foo/baz",
+			"type": "library"
+		},
+		{
+			"name": false
+		},
+		{
+			"name": "foo/boo",
+			"type": false
+		}
+	]
+}
