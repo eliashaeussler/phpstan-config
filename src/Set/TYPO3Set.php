@@ -41,9 +41,10 @@ final readonly class TYPO3Set implements ParameterizableSet
 
     public static function create(): static
     {
-        return new self(
-            Resource\Collection::create(),
-        );
+        $parameters = Resource\Collection::create();
+        $parameters->set('extEmConfVersionConstraint/enabled', true);
+
+        return new self($parameters);
     }
 
     /**
