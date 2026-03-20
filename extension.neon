@@ -9,19 +9,30 @@ parameters:
 		monitoredAnnotations:
 			- phpstan-ignore-line
 			- phpstan-ignore-next-line
+	extEmConfVersionConstraint:
+		enabled: false
 
 parametersSchema:
 	ignoreAnnotationWithoutErrorIdentifier: structure([
 		enabled: bool()
 		monitoredAnnotations: arrayOf(string())
 	])
+	extEmConfVersionConstraint: structure([
+		enabled: bool()
+	])
 
 conditionalTags:
 	EliasHaeussler\PHPStanConfig\Rule\IgnoreAnnotationWithoutErrorIdentifierRule:
 		phpstan.rules.rule: %ignoreAnnotationWithoutErrorIdentifier.enabled%
+	EliasHaeussler\PHPStanConfig\Rule\ExtEmConfVersionConstraintRule:
+		phpstan.rules.rule: %extEmConfVersionConstraint.enabled%
 
 services:
 	-
 		class: EliasHaeussler\PHPStanConfig\Rule\IgnoreAnnotationWithoutErrorIdentifierRule
 		arguments:
 			monitoredAnnotations: %ignoreAnnotationWithoutErrorIdentifier.monitoredAnnotations%
+	-
+		class: EliasHaeussler\PHPStanConfig\Rule\ExtEmConfVersionConstraintRule
+		arguments:
+			currentWorkingDirectory: %currentWorkingDirectory%

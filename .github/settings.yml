@@ -110,6 +110,8 @@ rulesets:
               integration_id: 15368
             - context: 'E2E Tests (manual suite)'
               integration_id: 15368
+            - context: 'E2E Tests (typo3-extension suite)'
+              integration_id: 15368
             - context: 'Test coverage'
               integration_id: 15368
     bypass_actors:
