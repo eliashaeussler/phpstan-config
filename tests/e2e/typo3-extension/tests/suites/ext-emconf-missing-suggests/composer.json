@@ -1,0 +1,38 @@
+{
+	"require": {
+		"php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+		"typo3/cms-core": "~13.4.0 || ~14.3.0"
+	},
+	"require-dev": {
+		"eliashaeussler/phpstan-config": "99.99.99",
+		"phpstan/extension-installer": "^1.4"
+	},
+	"suggest": {
+		"eliashaeussler/typo3-sitemap-locator": "^1.0",
+		"eliashaeussler/typo3-sitemap-robots": "Does cool stuff (^1.0)"
+	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../../../../../",
+			"options": {
+				"symlink": false,
+				"versions": {
+					"eliashaeussler/phpstan-config": "99.99.99"
+				}
+			}
+		}
+	],
+	"config": {
+		"allow-plugins": {
+			"phpstan/extension-installer": true,
+			"typo3/class-alias-loader": false,
+			"typo3/cms-composer-installers": false
+		},
+		"lock": false,
+		"sort-packages": true
+	},
+	"scripts": {
+		"test": "phpstan analyse -c phpstan.php"
+	}
+}

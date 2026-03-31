@@ -44,9 +44,16 @@ final class TYPO3SetTest extends Framework\TestCase
     #[Framework\Attributes\Test]
     public function createReturnsEmptySet(): void
     {
-        $actual = Src\Set\SymfonySet::create();
+        $actual = Src\Set\TYPO3Set::create();
 
-        self::assertSame([], $actual->getParameters()->toArray());
+        self::assertSame(
+            [
+                'extEmConfVersionConstraint' => [
+                    'enabled' => true,
+                ],
+            ],
+            $actual->getParameters()->toArray(),
+        );
     }
 
     #[Framework\Attributes\Test]
@@ -56,6 +63,9 @@ final class TYPO3SetTest extends Framework\TestCase
 
         self::assertSame(
             [
+                'extEmConfVersionConstraint' => [
+                    'enabled' => true,
+                ],
                 'typo3' => [
                     'contextApiGetAspectMapping' => [
                         'foo' => self::class,
@@ -73,6 +83,9 @@ final class TYPO3SetTest extends Framework\TestCase
 
         self::assertSame(
             [
+                'extEmConfVersionConstraint' => [
+                    'enabled' => true,
+                ],
                 'typo3' => [
                     'requestGetAttributeMapping' => [
                         'foo' => self::class,
@@ -90,6 +103,9 @@ final class TYPO3SetTest extends Framework\TestCase
 
         self::assertSame(
             [
+                'extEmConfVersionConstraint' => [
+                    'enabled' => true,
+                ],
                 'typo3' => [
                     'siteGetAttributeMapping' => [
                         'foo' => self::class,
