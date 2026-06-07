@@ -21,14 +21,28 @@ declare(strict_types=1);
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-use EliasHaeussler\PHPStanConfig\Config;
+use ShipMonk\ComposerDependencyAnalyser;
 
-return Config\Config::create(__DIR__)
-    ->in('src', 'tests/unit')
-    ->not('tests/unit/Fixtures/Files')
-    ->with('extension.neon')
-    ->withBleedingEdge()
-    ->maxLevel()
-    ->useCacheDir('.build/cache/phpstan')
-    ->toArray()
+$configuration = new ComposerDependencyAnalyser\Config\Configuration();
+$configuration
+    ->ignoreErrorsOnPackages(
+        [
+            'nikic/php-parser',
+            'phpstan/phpdoc-parser',
+        ],
+        [
+            ComposerDependencyAnalyser\Config\ErrorType::DEV_DEPENDENCY_IN_PROD,
+        ],
+    )
+    ->ignoreErrorsOnPackages(
+        [
+            'phpstan/phpstan-deprecation-rules',
+            'phpstan/phpstan-strict-rules',
+        ],
+        [
+            ComposerDependencyAnalyser\Config\ErrorType::UNUSED_DEPENDENCY,
+        ],
+    )
 ;
+
+return $configuration;
