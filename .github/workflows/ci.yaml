@@ -52,7 +52,7 @@ jobs:
       composer-options: '--with=phpstan/phpstan:^${{ matrix.phpstan-version }}'
 
   e2e-tests:
-    name: 'E2e tests (${{ matrix.suite }} suite)'
+    name: 'E2E tests (${{ matrix.suite }} suite)'
 
     needs: [prepare]
     if: ${{ needs.prepare.outputs.continue == 'true' }}
