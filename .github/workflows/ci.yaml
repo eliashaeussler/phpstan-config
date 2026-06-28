@@ -49,7 +49,7 @@ jobs:
       php-version: ${{ matrix.php-version }}
       composer-version: ${{ matrix.composer-version }}
       dependencies: ${{ matrix.dependencies }}
-      command: 'test:unit'
+      test-command: 'test:unit'
       composer-options: '--with=phpstan/phpstan:^${{ matrix.phpstan-version }}'
 
   e2e-tests:
